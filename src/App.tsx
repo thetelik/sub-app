@@ -25,7 +25,7 @@ export function App() {
 
   // Settings
   const [settings, setSettings] = useState<GameSettings>({
-    subIntervalSeconds: 300,
+    subIntervalSeconds: 180,
     fieldPlayerCount: 7,
     subBatchCount: 0, // 0 = all bench rotate
     soundEnabled: true,

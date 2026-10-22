@@ -32,17 +32,20 @@ export const LineupWizardStep: React.FC<LineupWizardStepProps> = ({
   );
   const [showCustomTime, setShowCustomTime] = useState(false);
 
-  // Time presets in seconds
+  // Time presets in seconds: 30s, 1.5m, 2m, 5m
   const TIME_PRESETS = [
-    { label: '30s (Test)', seconds: 30, tag: 'Quick Demo' },
-    { label: '3 min', seconds: 180 },
-    { label: '5 min', seconds: 300, tag: 'Standard' },
-    { label: '7 min', seconds: 420 },
-    { label: '10 min', seconds: 600 },
+    { label: '30s', seconds: 30, tag: 'Quick' },
+    { label: '1m', seconds: 60, subtext: '1:00' },
+    { label: '1m 30s', seconds: 90, subtext: '1:30' },
+    { label: '2m', seconds: 120, subtext: '2:00' },
+    { label: '3m', seconds: 180, subtext: '3:00' },
+    { label: '5m', seconds: 300,  subtext: '5:00'  },
   ];
 
   const handleSelectPreset = (seconds: number) => {
     onSetSettings((prev) => ({ ...prev, subIntervalSeconds: seconds }));
+    setCustomMins(Math.floor(seconds / 60).toString());
+    setCustomSecs((seconds % 60).toString());
     setShowCustomTime(false);
   };
 
@@ -217,7 +220,7 @@ export const LineupWizardStep: React.FC<LineupWizardStepProps> = ({
         </div>
 
         {/* Preset Buttons */}
-        <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-3">
+        <div className="grid grid-cols-4 gap-2 mb-3">
           {TIME_PRESETS.map((preset) => {
             const isSelected = settings.subIntervalSeconds === preset.seconds && !showCustomTime;
             return (
@@ -231,7 +234,7 @@ export const LineupWizardStep: React.FC<LineupWizardStepProps> = ({
                 }`}
               >
                 <span className="text-xs font-bold">{preset.label}</span>
-                {preset.tag && (
+                {preset.tag ? (
                   <span
                     className={`text-[9px] font-semibold mt-1 px-1.5 py-0.2 rounded ${
                       isSelected
@@ -241,7 +244,15 @@ export const LineupWizardStep: React.FC<LineupWizardStepProps> = ({
                   >
                     {preset.tag}
                   </span>
-                )}
+                ) : preset.subtext ? (
+                  <span
+                    className={`text-[9px] font-mono mt-1 ${
+                      isSelected ? 'text-emerald-200' : 'text-slate-400'
+                    }`}
+                  >
+                    {preset.subtext}
+                  </span>
+                ) : null}
               </button>
             );
           })}
