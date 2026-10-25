@@ -34,24 +34,8 @@ export const AttendanceStep: React.FC<AttendanceStepProps> = ({
 
       {/* Hero / Header Card */}
       <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 mb-4 shadow-lg">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <h2 className="text-lg font-bold text-white tracking-tight">Who is Playing Today?</h2>
-            <p className="text-xs text-slate-400 mt-1">
-              Tap the <span className="text-red-400 font-bold">X</span> next to any kid who didn't show up today to remove them from today's squad.
-            </p>
-          </div>
-          <button
-            onClick={onOpenRosterEditor}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition-colors shrink-0"
-          >
-            <Edit3 className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Edit Squad</span>
-          </button>
-        </div>
-
         {/* Attendance Summary Counters */}
-        <div className="grid grid-cols-2 gap-2 mt-3.5 pt-3 border-t border-slate-800/80">
+        <div className="grid grid-cols-2 gap-1 mt-0 pt-0.5  border-slate-800/80">
           <div className="bg-emerald-950/40 border border-emerald-500/20 rounded-xl px-3 py-2 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <UserCheck className="w-4 h-4 text-emerald-400" />
@@ -148,6 +132,23 @@ export const AttendanceStep: React.FC<AttendanceStepProps> = ({
             </div>
           );
         })}
+        <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 mb-4 shadow-lg">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-bold text-white tracking-tight">Who is Playing Today?</h2>
+              <p className="text-xs text-slate-400 mt-1">
+                You can edit the squad for today - if we have guest player etc. You can manually edit who is playing.
+              </p>
+            </div>
+            <button
+                onClick={onOpenRosterEditor}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition-colors shrink-0"
+            >
+              <Edit3 className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Edit Squad</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Floating Bottom Action Bar */}
@@ -173,6 +174,7 @@ export const AttendanceStep: React.FC<AttendanceStepProps> = ({
           </p>
         )}
       </div>
+
     </div>
   );
 };
