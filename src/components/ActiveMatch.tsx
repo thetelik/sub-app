@@ -75,7 +75,7 @@ export const ActiveMatch: React.FC<ActiveMatchProps> = ({
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-semibold border border-slate-700 transition-colors"
           >
             <Award className="w-3.5 h-3.5 text-amber-400" />
-            <span className="text-[11px]">Fair Play</span>
+            <span className="text-[11px]"></span>
           </button>
 
           <button

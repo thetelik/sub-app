@@ -1,6 +1,7 @@
 import React from 'react';
 import { Volume2, VolumeX, Shield, RotateCcw } from 'lucide-react';
 import { GameStage } from '../types';
+import { TEAM_NAME } from '../config/teamConfig';
 
 interface HeaderProps {
   stage: GameStage;
@@ -25,9 +26,9 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
         <div>
           <h1 className="font-bold text-base tracking-tight text-white flex items-center gap-1.5 leading-none">
-            {teamName ? teamName : 'SubSquad'}
+            {teamName ? teamName : TEAM_NAME}
             <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-              Fair Play
+              Subs app
             </span>
           </h1>
           <p className="text-[11px] text-slate-400 mt-0.5">Youth Match & Equal Subs</p>
