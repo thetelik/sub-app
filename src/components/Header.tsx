@@ -7,6 +7,7 @@ interface HeaderProps {
   soundEnabled: boolean;
   onToggleSound: () => void;
   onResetMatch: () => void;
+  teamName?: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -14,6 +15,7 @@ export const Header: React.FC<HeaderProps> = ({
   soundEnabled,
   onToggleSound,
   onResetMatch,
+  teamName,
 }) => {
   return (
     <header className="sticky top-0 z-30 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3 flex items-center justify-between select-none">
@@ -23,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
         <div>
           <h1 className="font-bold text-base tracking-tight text-white flex items-center gap-1.5 leading-none">
-            SubSquad
+            {teamName ? teamName : 'SubSquad'}
             <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
               Fair Play
             </span>

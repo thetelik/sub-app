@@ -4,6 +4,7 @@ import { loadSavedRoster, saveRoster } from './utils/rosterData';
 import { sounds } from './utils/audio';
 import { calculateNextRotation, executeRotation } from './utils/rotation';
 import { Header } from './components/Header';
+import { TeamBanner } from './components/TeamBanner';
 import { AttendanceStep } from './components/AttendanceStep';
 import { LineupWizardStep } from './components/LineupWizardStep';
 import { ActiveMatch } from './components/ActiveMatch';
@@ -311,6 +312,9 @@ export function App() {
         }
         onResetMatch={handleResetMatch}
       />
+
+      {/* Standard Compile-Time Team Header Banner (1200x400) */}
+      <TeamBanner compact={stage === 'playing'} />
 
       {/* Main Content Area */}
       <main className="flex-1">
