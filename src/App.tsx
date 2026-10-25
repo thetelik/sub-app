@@ -131,6 +131,10 @@ export function App() {
 
   // Proceed to Wizard Step 2
   const handleProceedToWizard = () => {
+
+
+    /* UNCOMMENT ME if we want to make default bench selection ALWAYS
+
     // If all are marked playing, auto-assign starters vs bench reasonably
     const active = players.filter((p) => p.status !== 'absent');
     if (active.length > 7) {
@@ -144,7 +148,7 @@ export function App() {
           };
         })
       );
-    }
+    }*/
     setStage('setup');
   };
 

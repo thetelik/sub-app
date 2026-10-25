@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:geckos": "npm run build && rm -rf docs/geckos && mkdir -p docs/geckos && cp -R dist/. docs/geckos/",
     "preview": "vite preview"
   },
   "dependencies": {
