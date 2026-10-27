@@ -61,36 +61,50 @@ export function App() {
     nextOutRef.current = nextOut;
   }, [nextIn, nextOut]);
 
-  // Timer loop for Active Match
+  // Ref mirror so the interval can read modal state without re-subscribing
+  const isSubModalOpenRef = useRef(isSubModalOpen);
   useEffect(() => {
-    if (stage !== 'playing' || isPaused || isSubModalOpen) {
+    isSubModalOpenRef.current = isSubModalOpen;
+  }, [isSubModalOpen]);
+
+  // Timer loop for Active Match.
+  // Runs in absolute/real time: while the sub popup is open awaiting subs,
+  // the subs countdown, match clock and every player counter keep accruing
+  // (on-pitch players are still physically playing). Only when subs are
+  // confirmed does executeRotation flip the taken-off players to 'bench',
+  // which is when their bench timer starts accruing.
+  useEffect(() => {
+    if (stage !== 'playing' || isPaused) {
       return;
     }
 
     const timer = setInterval(() => {
-      // 1. Decrement countdown
+      // 1. Decrement countdown (keeps running while the sub popup is open)
       setSubCountdownSeconds((prevCountdown) => {
-        // Warning beeps at 3, 2, 1
-        if (prevCountdown <= 4 && prevCountdown > 1) {
-          sounds.playBeep(false);
-        } else if (prevCountdown === 1) {
-          sounds.playBeep(true);
-        }
-
         if (prevCountdown <= 1) {
-          // Time expired! Trigger whistle & popup
-          sounds.playWhistle();
-          sounds.vibrate([300, 150, 400]);
-          setIsSubModalOpen(true);
+          // Time expired! Trigger whistle & popup once, then hold at 0
+          if (!isSubModalOpenRef.current) {
+            sounds.playBeep(true);
+            sounds.playWhistle();
+            sounds.vibrate([300, 150, 400]);
+            setIsSubModalOpen(true);
+          }
           return 0;
+        }
+        // Warning beeps at 3, 2
+        if (prevCountdown <= 4) {
+          sounds.playBeep(false);
         }
         return prevCountdown - 1;
       });
 
-      // 2. Increment match time
+      // 2. Increment match time (absolute real time, even with popup open)
       setTotalMatchSeconds((prev) => prev + 1);
 
-      // 3. Increment individual player stats
+      // 3. Increment individual player stats (absolute real time):
+      //    - playing players keep accruing total + shift time until subs are confirmed
+      //    - bench players accrue bench time; for players taken off this starts
+      //      at confirmation and continues while the popup remains open
       setPlayers((prevPlayers) =>
         prevPlayers.map((p) => {
           if (p.status === 'playing') {
@@ -112,7 +126,7 @@ export function App() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [stage, isPaused, isSubModalOpen]);
+  }, [stage, isPaused]);
 
   // Stage 1: Attendance handler (Tap X next to kid's name)
   const handleTogglePlayerAbsent = (playerId: string) => {
