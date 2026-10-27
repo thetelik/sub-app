@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "build:geckos": "npm run build && rm -rf docs/geckos && mkdir -p docs/geckos && cp -R dist/. docs/geckos/",
+    "build:baabaas": "npm run build && rm -rf docs/baabaas && mkdir -p docs/baabaas && cp -R dist/. docs/baabaas/",
     "preview": "vite preview"
   },
   "dependencies": {
