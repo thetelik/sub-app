@@ -1,6 +1,6 @@
 import React from 'react';
 import { Player, GameSettings } from '../types';
-import { Play, Pause, Plus, Minus, Users, Award, BellRing, ArrowUp, ArrowDown } from 'lucide-react';
+import { Play, Pause, Plus, Minus, Users, Award, BellRing, ArrowDown } from 'lucide-react';
 import { formatTime, formatFullTime } from '../utils/rotation';
 
 interface ActiveMatchProps {
