@@ -216,7 +216,7 @@ export const ActiveMatch: React.FC<ActiveMatchProps> = ({
             </button>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="grid grid-cols-1 gap-2 text-xs">
             {/* Next OUT */}
             <div className="p-2 rounded-xl bg-red-950/30 border border-red-500/20">
               <span className="text-[10px] font-bold text-red-400 flex items-center gap-1 mb-1">
@@ -225,17 +225,6 @@ export const ActiveMatch: React.FC<ActiveMatchProps> = ({
               </span>
               <div className="font-bold text-white truncate">
                 {nextOut.map((p) => `${p.name} (#${p.number})`).join(', ')}
-              </div>
-            </div>
-
-            {/* Next IN */}
-            <div className="p-2 rounded-xl bg-emerald-950/30 border border-emerald-500/20">
-              <span className="text-[10px] font-bold text-emerald-400 flex items-center gap-1 mb-1">
-                <ArrowUp className="w-3 h-3" />
-                NEXT TO PITCH:
-              </span>
-              <div className="font-bold text-white truncate">
-                {nextIn.map((p) => `${p.name} (#${p.number})`).join(', ')}
               </div>
             </div>
           </div>
