@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Player, GameStage, GameSettings } from './types';
-import { loadSavedRoster, saveRoster } from './utils/rosterData';
+import { loadSavedRoster, saveRoster, DEFAULT_ROSTER } from './utils/rosterData';
+import { ACTIVE_TEAM } from './config/teamConfig';
 import { sounds } from './utils/audio';
 import { calculateNextRotation, executeRotation } from './utils/rotation';
 import { Header } from './components/Header';
@@ -329,6 +330,7 @@ export function App() {
           setSettings((prev) => ({ ...prev, soundEnabled: !prev.soundEnabled }))
         }
         onResetMatch={handleResetMatch}
+        teamName={ACTIVE_TEAM.name}
       />
 
       {/* Standard Compile-Time Team Header Banner (1200x400) */}
@@ -402,6 +404,8 @@ export function App() {
         onClose={() => setIsRosterEditorOpen(false)}
         players={players}
         onSaveRoster={handleSaveRoster}
+        teamName={ACTIVE_TEAM.name}
+        defaultRoster={DEFAULT_ROSTER}
       />
 
       {/* Equal Play Time Stats Drawer */}

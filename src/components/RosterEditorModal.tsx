@@ -8,6 +8,8 @@ interface RosterEditorModalProps {
   onClose: () => void;
   players: Player[];
   onSaveRoster: (newPlayers: Player[]) => void;
+  teamName?: string;
+  defaultRoster?: Player[];
 }
 
 export const RosterEditorModal: React.FC<RosterEditorModalProps> = ({
@@ -15,6 +17,8 @@ export const RosterEditorModal: React.FC<RosterEditorModalProps> = ({
   onClose,
   players,
   onSaveRoster,
+  teamName,
+  defaultRoster = DEFAULT_ROSTER,
 }) => {
   const [list, setList] = useState<Player[]>(players);
   const [newName, setNewName] = useState('');
@@ -64,8 +68,9 @@ export const RosterEditorModal: React.FC<RosterEditorModalProps> = ({
   };
 
   const handleResetToDefault = () => {
-    if (confirm('Reset squad back to standard 12 player sample list (John - 1, Aaron - 2...)?')) {
-      setList(DEFAULT_ROSTER);
+    const label = teamName ? `${teamName} default roster` : 'default roster';
+    if (confirm(`Reset squad back to ${label}?`)) {
+      setList(defaultRoster);
     }
   };
 
